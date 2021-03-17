@@ -1,7 +1,6 @@
 import React from 'react';
 import {  withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import Chemical from '../components/Chemical'
 
 class UserMainContent extends React.Component {
     renderUserInfo = () => {
