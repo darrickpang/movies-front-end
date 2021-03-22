@@ -11,6 +11,8 @@ class App extends React.Component {
       id: null,
       name: "",
     },
+    movies: [], 
+    comments: [],
     token: ""
   }
 
@@ -24,6 +26,13 @@ class App extends React.Component {
       .then(res => res.json())
       .then(json => this.userAuthResponse(json))
     }
+    fetch('http://localhost:3000/comments')
+    .then(res => res.json())
+    .then(json => this.setState({comments: json}))
+
+    fetch('http://localhost:3000/movies')
+    .then(res => res.json())
+    .then(json => this.setState({movies: json}))
   }
 
   userAuthResponse = (json) => {
