@@ -47,7 +47,7 @@ export default class UserLoginSignUp extends React.Component {
 
     render(){
         return(
-        <div className="page-header" style={{ backgroundImage: "url(" + require("../image/1920px--Rio_2016_Summer_Olympics_-_swimming_2016-08-11.webm.jpg") + ")"}}>
+        <div className="page-header" style={{ backgroundImage: "url(" + require("../image/movies.jpg") + ")"}}>
             <Container>
                 <Col className="ml-auto mr-auto" lg="4">
                 <Card className="card-register ml-auto mr-auto">
