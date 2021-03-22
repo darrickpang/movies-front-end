@@ -2,12 +2,12 @@ import React from 'react';
 import {  withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import {CardBody, Button, Form, Input, FormGroup, Row, Col, Label} from 'reactstrap'
 
-class Exercise extends React.Component {
+class Movie extends React.Component {
     
     state = {
         id: null, 
         name: null,
-        exerciseAdd: true,
+        movieAdd: true,
         deleteExercise: false
     }
     
@@ -25,10 +25,10 @@ class Exercise extends React.Component {
                 name: name
             }
             // persist to database
-            if(this.state.exerciseAdd){
+            if(this.state.movieAdd){
                 addExercise(date_info)
             } 
-            else if(!this.state.exerciseAdd && e.target.name === "update"){
+            else if(!this.state.movieAdd && e.target.name === "update"){
                 updateExercise(this.state.id, date_info)
             }
             else {
@@ -38,7 +38,7 @@ class Exercise extends React.Component {
             this.setState({
                 id: null,
                 name: null,
-                exerciseAdd: true
+                movieAdd: true
             })
             e.target.parentElement.reset()
         }
@@ -52,7 +52,7 @@ class Exercise extends React.Component {
             this.setState({
                 id: null,
                 name: null,
-                exerciseAdd: true
+                movieAdd: true
             })
         }
         else{
@@ -60,7 +60,7 @@ class Exercise extends React.Component {
             this.setState({
                 id: find_date.id,
                 name: find_date.name,
-                exerciseAdd: false
+                movieAdd: false
             })
         }
     }
@@ -79,13 +79,13 @@ class Exercise extends React.Component {
 
         return (
             <div>
-                Add Exercise
+                Add Movie
                 <CardBody>
                     <Form onSubmit={(e) => this.handleSubmit(e, addExercise)}>
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Input type="text" name="name" id="name" placeholder="Exercise name" value={this.state.name} onChange={this.handleOnChange}/>
+                                    <Input type="text" name="name" id="name" placeholder="Movie name" value={this.state.name} onChange={this.handleOnChange}/>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -96,7 +96,7 @@ class Exercise extends React.Component {
                                 {exercises ? this.generateDateDropdownOptions(exercises) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addExercise, updateExercise, deleteExercise)}>Add or update Exercise</Button>
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addExercise, updateExercise, deleteExercise)}>Add or update Movie</Button>
                         {this.state.deleteExercise ? 
                             <Button className="button"onClick={(e) => this.handleSubmit(e, addExercise, updateExercise, deleteExercise)}>Delete Schedule</Button> : false
                         }
@@ -107,4 +107,4 @@ class Exercise extends React.Component {
     }
 }
 
-export default withRouter(Exercise)
+export default withRouter(Movie)

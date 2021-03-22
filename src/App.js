@@ -95,6 +95,74 @@ class App extends React.Component {
     })
   }
 
+  // Movies
+  addMovie = (newMovie) => {
+    fetch(`http://localhost:3000/movies`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(newMovie),
+  }) 
+  .then(r => r.json())
+  .then(json => {
+      this.setState({
+        movies: [...this.state.movies, {
+          id: json.id,
+          name: json.name,
+          year: json.year,
+          poster: json.poster
+        }]
+      })
+    })
+  }
+
+  updateMovie = (id, date_info) => {
+    fetch(`http://localhost:3000/movies/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(date_info)
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log('updated')
+      let movies = this.state.movies.map(date_info => {
+        if(date_info.id === json.id){
+            let newMovie = {
+                  id: json.id,
+                  name: json.name,
+                  year: json.year,
+                  poster: json.poster
+            }
+            return newMovie
+            }
+            else{
+              return date_info
+            }
+        })
+        this.setState({
+            movies: movies
+    })})
+  }
+
+  deleteMovie = (id, movie) => {
+    fetch(`http://localhost:3000/movies/${id}`, {
+      method: 'DELETE'
+    }) 
+    .then(r => r.json())
+    .then(json => {
+      console.log('deleted')
+      let movies = this.state.movies.filter(movie => movie.id !== id)
+      this.setState({
+        movies: movies
+      })
+    })
+  }
+
   renderUserLogin = () => {
     return <UserLoginSignUp login={true} userLogin={this.userLogin}/>
   }
@@ -104,7 +172,7 @@ class App extends React.Component {
   }
 
   renderUserMainContent = () => {
-    return <UserMainContent user ={this.state.user} token={this.state.token} 
+    return <UserMainContent user ={this.state.user} token={this.state.token} addMovie={this.addMovie} updateMovie={this.updateMovie} deleteMovie={this.deleteMovie}
           />
   }
 
