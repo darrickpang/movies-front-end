@@ -7,8 +7,10 @@ class Movie extends React.Component {
     state = {
         id: null, 
         name: null,
+        year: null,
+        poster: null,
         movieAdd: true,
-        deleteExercise: false
+        deleteMovie: false
     }
     
     handleOnChange = (e) => {
@@ -17,33 +19,37 @@ class Movie extends React.Component {
         })
     }
 
-    handleSubmit = (e, addExercise, updateExercise, deleteExercise) => {
+    handleSubmit = (e, addMovie, updateMovie, deleteMovie) => {
         e.preventDefault()
-        let {name} = this.state
-        if(name !== null ){
+        let {name, year, poster} = this.state
+        if(name !== null && year !== null && poster !== null){
             let date_info = {
-                name: name
+                name: name,
+                year: year,
+                poster: poster 
             }
             // persist to database
             if(this.state.movieAdd){
-                addExercise(date_info)
+                addMovie(date_info)
             } 
             else if(!this.state.movieAdd && e.target.name === "update"){
-                updateExercise(this.state.id, date_info)
+                updateMovie(this.state.id, date_info)
             }
             else {
-                deleteExercise(this.state.id, date_info)
+                deleteMovie(this.state.id, date_info)
             }
             // reset state
             this.setState({
                 id: null,
                 name: null,
+                year: year,
+                poster: poster,  
                 movieAdd: true
             })
             e.target.parentElement.reset()
         }
         else{
-            alert("You must include a name to create a new exercise.")
+            alert("You must include a name to create a new movie.")
         }
     }
 
@@ -60,45 +66,53 @@ class Movie extends React.Component {
             this.setState({
                 id: find_date.id,
                 name: find_date.name,
+                year: find_date.year,
+                poster: find_date.poster,
                 movieAdd: false
             })
         }
     }
 
-    generateDateDropdownOptions = (exercises) => {
-        return exercises.map(exercise => {
-            return <option id={exercise.id} key={exercise.id} value={exercise.id}>
-                    {exercise.date}, {exercise.name}
+    generateDateDropdownOptions = (movies) => {
+        return movies.map(movie => {
+            return <option id={movie.id} key={movie.id} value={movie.id}>
+                    {movie.year}, {movie.name}, {movie.poster}
                 </option>
             }
         )
     }
 
     render() {
-        let {addExercise, updateExercise, deleteExercise, exercises} = this.props
+        let {addMovie, updateMovie, deleteMovie, movies} = this.props
 
         return (
             <div>
                 Add Movie
                 <CardBody>
-                    <Form onSubmit={(e) => this.handleSubmit(e, addExercise)}>
+                    <Form onSubmit={(e) => this.handleSubmit(e, addMovie)}>
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
                                     <Input type="text" name="name" id="name" placeholder="Movie name" value={this.state.name} onChange={this.handleOnChange}/>
                                 </FormGroup>
+                                <FormGroup>
+                                    <Input type="text" name="year" id="year" placeholder="Year" value={this.state.year} onChange={this.handleOnChange}/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Input type="text" name="poster" id="poster" placeholder="Poster link" value={this.state.poster} onChange={this.handleOnChange}/>
+                                </FormGroup>
                             </Col>
                         </Row>
-                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, exercises)}>
-                            <Label for="edit-schedule">Change exercise</Label>
+                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, movies)}>
+                            <Label for="edit-schedule">Change movie</Label>
                             <Input type="select" name="select" id="edit-schedule">
-                                <option value={"n/a"}>Select exercise</option>
-                                {exercises ? this.generateDateDropdownOptions(exercises) : false}
+                                <option value={"n/a"}>Select movie</option>
+                                {movies ? this.generateDateDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addExercise, updateExercise, deleteExercise)}>Add or update Movie</Button>
-                        {this.state.deleteExercise ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addExercise, updateExercise, deleteExercise)}>Delete Schedule</Button> : false
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Add or update Movie</Button>
+                        {this.state.deleteMovie ? 
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Delete Schedule</Button> : false
                         }
                     </Form> 
                 </CardBody>

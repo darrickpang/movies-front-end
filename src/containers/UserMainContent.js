@@ -23,9 +23,9 @@ class UserMainContent extends React.Component {
     }
 
     renderMovieContainer = () => {
-        let {addMovie, updateMovie, deleteMovie} = this.props
+        let {addMovie, updateMovie, deleteMovie, movies} = this.props
         return(
-            <MovieContainer addMovie={addMovie} updateMovie={updateMovie} deleteMovie={deleteMovie}/>
+            <MovieContainer addMovie={addMovie} updateMovie={updateMovie} deleteMovie={deleteMovie} movies={movies}/>
         )
     }
 

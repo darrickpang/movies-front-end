@@ -6,15 +6,16 @@ import Movie from '../components/Movie'
 class MovieContainer extends React.Component {
    
     renderMovie = () =>{
-        let {addMovie, updateMovie, deleteMovie} = this.props
+        let {addMovie, updateMovie, deleteMovie, movies} = this.props
         return(
-            <Movie />
+            <Movie addMovie={addMovie} updateMovie={updateMovie} deleteMovie={deleteMovie} movies={movies}/>
         )
     }
     render(){
         return(
             <div>
                 movie container
+                {this.renderMovie()}
             </div>
         )
     }
