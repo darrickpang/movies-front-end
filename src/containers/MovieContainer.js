@@ -4,6 +4,18 @@ import { Button } from 'reactstrap';
 import Movie from '../components/Movie'
 
 class MovieContainer extends React.Component {
+
+    renderTitles = () => {
+        return(
+            <div>
+                {this.props.movies.map(movie => {
+                    return(
+                        <p>{movie.name}, {movie.year}, {movie.poster}</p>
+                    )
+                })}
+            </div>
+        )
+    }
    
     renderMovie = () =>{
         let {addMovie, updateMovie, deleteMovie, movies} = this.props
@@ -16,6 +28,7 @@ class MovieContainer extends React.Component {
             <div>
                 movie container
                 {this.renderMovie()}
+                {this.renderTitles()}
             </div>
         )
     }
