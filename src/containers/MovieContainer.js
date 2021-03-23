@@ -1,19 +1,35 @@
 import React from 'react';
 import {  withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 import Movie from '../components/Movie'
 
 class MovieContainer extends React.Component {
 
     state = {
-        titles: []
+        movie_titles: [],
+        search: null
     }
 
     componentDidMount(){
-        fetch(`http://www.omdbapi.com/?s=star wars&apikey=${process.env.REACT_APP_movie_api}`)
-    .then(res => res.json())
-    .then(json => this.setState({comments: json}))
+        fetch(`http://www.omdbapi.com/?s=${this.state.search}&apikey=${process.env.REACT_APP_movie_api}`)
+        .then(res => res.json())
+        .then(json => this.setState({movie_titles: json}))
     }
+
+    handleOnChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    searchMovies = () => {
+        return(
+            <div>
+                <Input type="text" search="search" id="name" placeholder="Movie name" value={this.state.search} onChange={this.handleOnChange}></Input>
+                <Button className="button">Search</Button>
+            </div> 
+        )
+        }
 
     renderTitles = () => {
         return(
@@ -34,11 +50,13 @@ class MovieContainer extends React.Component {
         )
     }
     render(){
+        console.log(this.state.movie_titles)
         return(
             <div>
                 movie container
                 {this.renderMovie()}
                 {this.renderTitles()}
+                {this.searchMovies()}
             </div>
         )
     }
