@@ -40,7 +40,7 @@ class MovieContainer extends React.Component {
 
     showSearch = () => {
         if(this.state.search === ""){
-            return <span>Loading...</span>;
+            return <span></span>;
         }
         return(
             <div>

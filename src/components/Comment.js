@@ -6,11 +6,9 @@ class Comment extends React.Component {
     
     state = {
         id: null, 
-        name: null,
-        year: null,
-        poster: null,
-        movieAdd: true,
-        deleteMovie: false
+        comment: null,
+        commentAdd: true,
+        deleteComment: false
     }
     
     handleOnChange = (e) => {
@@ -19,37 +17,35 @@ class Comment extends React.Component {
         })
     }
 
-    handleSubmit = (e, addMovie, updateMovie, deleteMovie) => {
+    handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {name, year, poster} = this.state
-        if(name !== null && year !== null && poster !== null){
+        let {comment, year, poster} = this.state
+        if(comment !== null ){
             let date_info = {
-                name: name,
-                year: year,
-                poster: poster 
+                comment: comment
             }
             // persist to database
-            if(this.state.movieAdd){
-                addMovie(date_info)
+            if(this.state.commentAdd){
+                addComment(date_info)
             } 
-            else if(!this.state.movieAdd && e.target.name === "update"){
-                updateMovie(this.state.id, date_info)
+            else if(!this.state.commentAdd && e.target.comment === "update"){
+                updateComment(this.state.id, date_info)
             }
             else {
-                deleteMovie(this.state.id, date_info)
+                deleteComment(this.state.id, date_info)
             }
             // reset state
             this.setState({
                 id: null,
-                name: null,
+                comment: null,
                 year: year,
                 poster: poster,  
-                movieAdd: true
+                commentAdd: true
             })
             e.target.parentElement.reset()
         }
         else{
-            alert("You must include a name to create a new movie.")
+            alert("You must include a comment to comment.")
         }
     }
 
@@ -57,18 +53,16 @@ class Comment extends React.Component {
         if(selectedValue === "n/a"){
             this.setState({
                 id: null,
-                name: null,
-                movieAdd: true
+                comment: null,
+                commentAdd: true
             })
         }
         else{
             let find_date = dates.find(date_info => date_info.id == selectedValue)
             this.setState({
                 id: find_date.id,
-                name: find_date.name,
-                year: find_date.year,
-                poster: find_date.poster,
-                movieAdd: false
+                comment: find_date.comment,
+                commentAdd: false
             })
         }
     }
@@ -76,43 +70,37 @@ class Comment extends React.Component {
     generateDateDropdownOptions = (movies) => {
         return movies.map(movie => {
             return <option id={movie.id} key={movie.id} value={movie.id}>
-                    {movie.year}, {movie.name}, {movie.poster}
+                    {movie.comment}
                 </option>
             }
         )
     }
 
     render() {
-        let {addMovie, updateMovie, deleteMovie, movies} = this.props
+        let {addComment, updateComment, deleteComment, movies} = this.props
 
         return (
             <div>
                 Add Comment
                 <CardBody>
-                    <Form onSubmit={(e) => this.handleSubmit(e, addMovie)}>
+                    <Form onSubmit={(e) => this.handleSubmit(e, addComment)}>
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Input type="text" name="name" id="name" placeholder="Comment name" value={this.state.name} onChange={this.handleOnChange}/>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="year" id="year" placeholder="Year" value={this.state.year} onChange={this.handleOnChange}/>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="poster" id="poster" placeholder="Poster link" value={this.state.poster} onChange={this.handleOnChange}/>
+                                    <Input type="text" comment="comment" id="comment" placeholder="Comment comment" value={this.state.comment} onChange={this.handleOnChange}/>
                                 </FormGroup>
                             </Col>
                         </Row>
                         <FormGroup onChange={(e) => this.autoFillForm(e.target.value, movies)}>
                             <Label for="edit-schedule">Change movie</Label>
-                            <Input type="select" name="select" id="edit-schedule">
+                            <Input type="select" comment="select" id="edit-schedule">
                                 <option value={"n/a"}>Select movie</option>
                                 {movies ? this.generateDateDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Add or update Comment</Button>
-                        {this.state.deleteMovie ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Delete Schedule</Button> : false
+                        <Button className="button" comment="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
+                        {this.state.deleteComment ? 
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Schedule</Button> : false
                         }
                     </Form> 
                 </CardBody>
