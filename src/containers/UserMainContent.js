@@ -2,6 +2,7 @@ import React from 'react';
 import {  withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import MovieContainer from './MovieContainer'
+import CommentContainer from './CommentContainer'
 
 class UserMainContent extends React.Component {
     renderUserInfo = () => {
@@ -26,6 +27,13 @@ class UserMainContent extends React.Component {
         let {addMovie, updateMovie, deleteMovie, movies} = this.props
         return(
             <MovieContainer addMovie={addMovie} updateMovie={updateMovie} deleteMovie={deleteMovie} movies={movies}/>
+        )
+    }
+
+    renderCommentContainer = () => {
+        let {addComment, updateComment} = this.props
+        return(
+            <CommentContainer addComment={addComment} updateComment={updateComment}/>
         )
     }
 
