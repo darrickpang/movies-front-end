@@ -43,7 +43,7 @@ class App extends React.Component {
           id: json.user.data.attributes.id,
           name: json.user.data.attributes.name,
         },
-        chemical_user: json.user.data.attributes.chemical_users, 
+        comments: json.user.data.attributes.chemical_users, 
         token: json.token
       }, () => this.props.history.push('/user_main'))
     }
@@ -163,6 +163,55 @@ class App extends React.Component {
     })
   }
 
+  // Comments
+  addComment = (newComment) => {
+    fetch(`http://localhost:3000/chemical_users`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(newComment),
+    }) 
+    .then(r => r.json())
+    .then(json => {
+      this.setState({
+        comments: [...this.state.comments, {
+          id: json.id,
+          comment: json.comment
+        }]
+      })
+    })
+  }
+
+  updateComment = (id, comment) => {
+    fetch(`http://localhost:3000/chemcial_users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(comment)
+    })
+    .then(res => res.json())
+    .then(json => {
+      let comments = this.state.comments.map(comment => {
+        if(comment.id === json.id){
+            let newComment = {
+                  id: json.id,
+                  comment: json.comment,
+            }
+            return newComment
+            }
+            else{
+              return comment
+            }
+        })
+        this.setState({
+            comments: comments
+    })})
+  }
+
   renderUserLogin = () => {
     return <UserLoginSignUp login={true} userLogin={this.userLogin}/>
   }
@@ -173,7 +222,7 @@ class App extends React.Component {
 
   renderUserMainContent = () => {
     return <UserMainContent user ={this.state.user} token={this.state.token} addMovie={this.addMovie} updateMovie={this.updateMovie} deleteMovie={this.deleteMovie}
-            movies={this.state.movies}
+            movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment}
           />
   }
 
