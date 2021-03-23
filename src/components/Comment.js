@@ -7,6 +7,7 @@ class Comment extends React.Component {
     state = {
         id: null, 
         comment: null,
+        movie_id: null,
         commentAdd: true,
         deleteComment: false
     }
@@ -19,10 +20,11 @@ class Comment extends React.Component {
 
     handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {comment, year, poster} = this.state
-        if(comment !== null ){
+        let {comment, movie_id} = this.state
+        if(comment !== null && movie_id !== null){
             let date_info = {
                 comment: comment,
+                movie_id: parseInt(movie_id),
                 user_id: parseInt(this.props.user.id)
             }
             // persist to database
@@ -39,8 +41,7 @@ class Comment extends React.Component {
             this.setState({
                 id: null,
                 comment: null,
-                year: year,
-                poster: poster,  
+                movie_id: movie_id,
                 commentAdd: true
             })
             e.target.parentElement.reset()
