@@ -212,6 +212,20 @@ class App extends React.Component {
     })})
   }
 
+  deleteComment = (id, comment) => {
+    fetch(`http://localhost:3000/comments/${id}`, {
+      method: 'DELETE'
+    }) 
+    .then(r => r.json())
+    .then(json => {
+      console.log('deleted')
+      let comments = this.state.comments.filter(comment => comment.id !== id)
+      this.setState({
+        comments: comments
+      })
+    })
+  }
+
   renderUserLogin = () => {
     return <UserLoginSignUp login={true} userLogin={this.userLogin}/>
   }
@@ -222,7 +236,7 @@ class App extends React.Component {
 
   renderUserMainContent = () => {
     return <UserMainContent user ={this.state.user} token={this.state.token} addMovie={this.addMovie} updateMovie={this.updateMovie} deleteMovie={this.deleteMovie}
-            movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment} comments={this.state.comments}
+            movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment} comments={this.state.comments} deleteComment={this.deleteComment}
           />
   }
 
