@@ -13,7 +13,7 @@ class MovieContainer extends React.Component {
     fetchMovies = (searchMovie) => {
         fetch(`http://www.omdbapi.com/?s=${searchMovie}&apikey=${process.env.REACT_APP_movie_api}`)
         .then(res => res.json())
-        .then(json => this.setState({movie_titles: json}))
+        .then(json => this.setState({movie_titles: json.Search}))
     }
 
     handleSubmit = event => {
@@ -21,18 +21,35 @@ class MovieContainer extends React.Component {
         this.fetchMovies(this.state.search)
       }
 
-    handleOnChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
     searchMovies = () => {
         return(
-            <Form onSubmit={this.handleSubmit}>
-                <Input type="text" search="search" id="name" placeholder="Movie name" value={this.state.search} onChange={event => this.setState({search: event.target.value})} ></Input>
-                <Button className="button">Search</Button>
-            </Form> 
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                    <Input type="text" search="search" id="name" placeholder="Movie name" value={this.state.search} 
+                        onChange={event => this.setState({search: event.target.value})} >
+                    </Input>
+                    <Button className="button">Search</Button>
+                </Form> 
+            </div>
+        )
+    }
+
+    componentDidMount(){
+        this.searchMovies()
+    }
+
+    showSearch = () => {
+        if(this.state.search === ""){
+            return <span>Loading...</span>;
+        }
+        return(
+            <div>
+                {this.state.movie_titles.map(movie => {
+                    return(
+                        <p> Name: {movie.Title}, Year: {movie.Year}</p>
+                    )
+                })}
+            </div>
         )
     }
 
@@ -55,7 +72,6 @@ class MovieContainer extends React.Component {
         )
     }
     render(){
-        console.log(this.state.search)
         console.log(this.state.movie_titles)
         return(
             <div>
@@ -63,6 +79,7 @@ class MovieContainer extends React.Component {
                 {this.renderMovie()}
                 {this.renderTitles()}
                 {this.searchMovies()}
+                {this.showSearch()}
             </div>
         )
     }
