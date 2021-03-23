@@ -92,15 +92,15 @@ class Comment extends React.Component {
                             </Col>
                         </Row>
                         <FormGroup onChange={(e) => this.autoFillForm(e.target.value, movies)}>
-                            <Label for="edit-schedule">Change movie</Label>
+                            <Label for="edit-schedule">Change comment</Label>
                             <Input type="select" comment="select" id="edit-schedule">
-                                <option value={"n/a"}>Select movie</option>
+                                <option value={"n/a"}>Select comment</option>
                                 {movies ? this.generateDateDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
                         <Button className="button" comment="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
                         {this.state.deleteComment ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Schedule</Button> : false
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Comment</Button> : false
                         }
                     </Form> 
                 </CardBody>
