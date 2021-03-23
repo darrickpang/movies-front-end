@@ -22,7 +22,8 @@ class Comment extends React.Component {
         let {comment, year, poster} = this.state
         if(comment !== null ){
             let date_info = {
-                comment: comment
+                comment: comment,
+                user_id: parseInt(this.props.user.id)
             }
             // persist to database
             if(this.state.commentAdd){
