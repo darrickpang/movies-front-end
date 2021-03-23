@@ -10,7 +10,7 @@ class MovieContainer extends React.Component {
             <div>
                 {this.props.movies.map(movie => {
                     return(
-                        <p>{movie.name}, {movie.year}, {movie.poster}</p>
+                        <p> Name: {movie.name}, Year: {movie.year}, <img src={movie.poster}></img></p>
                     )
                 })}
             </div>
