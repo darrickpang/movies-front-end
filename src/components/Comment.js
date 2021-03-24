@@ -47,10 +47,9 @@ class Comment extends React.Component {
             e.target.parentElement.reset()
         }
         else{
-            if(this.state.post === null){
-                alert("You must type a post to.")
+            if(this.state.movie_id === null){
+                alert("You must include a movie to post.")
             }
-            
         }
     }
 

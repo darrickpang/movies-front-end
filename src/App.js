@@ -178,7 +178,8 @@ class App extends React.Component {
       this.setState({
           posts: [...this.state.posts, {
           id: json.id,
-          post: json.post
+          post: json.post,
+          movie_id: json.movie_id
         }]
       })
     })
@@ -195,11 +196,12 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(json => {
-      let posts = this.state.comments.map(post => {
+      let posts = this.state.posts.map(post => {
         if(post.id === json.id){
             let newComment = {
                   id: json.id,
                   post: json.post,
+                  movie_id: json.movie_id
             }
             return newComment
             }
