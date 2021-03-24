@@ -6,7 +6,7 @@ class Comment extends React.Component {
     
     state = {
         id: null, 
-        comment: null,
+        post: null,
         movie_id: null,
         commentAdd: true,
         deleteComment: false
@@ -20,10 +20,10 @@ class Comment extends React.Component {
 
     handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {comment, movie_id} = this.state
-        if(comment !== null && movie_id !== null){
+        let {post, movie_id} = this.state
+        if(post !== null && movie_id !== null){
             let date_info = {
-                comment: comment,
+                post: post,
                 movie_id: parseInt(movie_id),
                 user_id: parseInt(this.props.user.id)
             }
@@ -31,7 +31,7 @@ class Comment extends React.Component {
             if(this.state.commentAdd){
                 addComment(date_info)
             } 
-            else if(!this.state.commentAdd && e.target.comment === "update"){
+            else if(!this.state.commentAdd && e.target.post === "update"){
                 updateComment(this.state.id, date_info)
             }
             else {
@@ -40,14 +40,17 @@ class Comment extends React.Component {
             // reset state
             this.setState({
                 id: null,
-                comment: null,
+                post: null,
                 movie_id: null,
                 commentAdd: true
             })
             e.target.parentElement.reset()
         }
         else{
-            alert("You must include a comment to comment.")
+            if(this.state.post === null){
+                alert("You must type a post to.")
+            }
+            
         }
     }
 
@@ -55,7 +58,7 @@ class Comment extends React.Component {
         if(selectedValue === "n/a"){
             this.setState({
                 id: null,
-                comment: null,
+                post: null,
                 movie_id: null,
                 commentAdd: true
             })
@@ -64,23 +67,23 @@ class Comment extends React.Component {
             let find_date = dates.find(date_info => date_info.id == selectedValue)
             this.setState({
                 id: find_date.id,
-                comment: find_date.comment,
+                post: find_date.post,
                 commentAdd: false
             })
         }
     }
 
-    generateDateDropdownOptions = (comments) => {
-        return comments.map(comment => {
-            return <option id={comment.id} key={comment.id} value={comment.id}>
-                    {comment.comment}
+    generateDateDropdownOptions = (posts) => {
+        return posts.map(post => {
+            return <option id={post.id} key={post.id} value={post.id}>
+                    {post.post}
                 </option>
             }
         )
     }
 
     render() {
-        let {addComment, updateComment, deleteComment, comments} = this.props
+        let {addComment, updateComment, deleteComment, posts} = this.props
 
         return (
             <div>
@@ -90,18 +93,18 @@ class Comment extends React.Component {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Input type="text" comment="comment" id="comment" placeholder="Comment here" value={this.state.comment} onChange={this.handleOnChange}/>
+                                    <Input type="text" name="post" id="post" placeholder="Comment here" value={this.state.post} onChange={this.handleOnChange}/>
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, comments)}>
-                            <Label for="edit-schedule">Change comment</Label>
-                            <Input type="select" comment="select" id="edit-schedule">
-                                <option value={"n/a"}>Select comment</option>
-                                {comments ? this.generateDateDropdownOptions(comments) : false}
+                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, posts)}>
+                            <Label for="edit-schedule">Change post</Label>
+                            <Input type="select" post="select" id="edit-schedule">
+                                <option value={"n/a"}>Select post</option>
+                                {posts ? this.generateDateDropdownOptions(posts) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" comment="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
+                        <Button className="button" post="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
                         {this.state.deleteComment ? 
                             <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Comment</Button> : false
                         }

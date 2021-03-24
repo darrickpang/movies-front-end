@@ -12,7 +12,7 @@ class App extends React.Component {
       name: "",
     },
     movies: [], 
-    comments: [],
+    posts: [],
     token: ""
   }
 
@@ -28,7 +28,7 @@ class App extends React.Component {
     }
     fetch('http://localhost:3000/comments')
     .then(res => res.json())
-    .then(json => this.setState({comments: json}))
+    .then(json => this.setState({posts: json}))
 
     fetch('http://localhost:3000/movies')
     .then(res => res.json())
@@ -176,52 +176,52 @@ class App extends React.Component {
     .then(r => r.json())
     .then(json => {
       this.setState({
-        comments: [...this.state.comments, {
+          posts: [...this.state.posts, {
           id: json.id,
-          comment: json.comment
+          post: json.post
         }]
       })
     })
   }
 
-  updateComment = (id, comment) => {
+  updateComment = (id, post) => {
     fetch(`http://localhost:3000/comments/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(comment)
+      body: JSON.stringify(post)
     })
     .then(res => res.json())
     .then(json => {
-      let comments = this.state.comments.map(comment => {
-        if(comment.id === json.id){
+      let posts = this.state.comments.map(post => {
+        if(post.id === json.id){
             let newComment = {
                   id: json.id,
-                  comment: json.comment,
+                  post: json.post,
             }
             return newComment
             }
             else{
-              return comment
+              return post
             }
         })
         this.setState({
-            comments: comments
+            posts: posts
     })})
   }
 
-  deleteComment = (id, comment) => {
+  deleteComment = (id, post) => {
     fetch(`http://localhost:3000/comments/${id}`, {
       method: 'DELETE'
     }) 
     .then(r => r.json())
     .then(json => {
       console.log('deleted')
-      let comments = this.state.comments.filter(comment => comment.id !== id)
+      let posts= this.state.posts.filter(post => post.id !== id)
       this.setState({
-        comments: comments
+        posts: posts
       })
     })
   }
@@ -236,7 +236,7 @@ class App extends React.Component {
 
   renderUserMainContent = () => {
     return <UserMainContent user ={this.state.user} token={this.state.token} addMovie={this.addMovie} updateMovie={this.updateMovie} deleteMovie={this.deleteMovie}
-            movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment} comments={this.state.comments} deleteComment={this.deleteComment}
+            movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment} posts={this.state.posts} deleteComment={this.deleteComment}
           />
   }
 

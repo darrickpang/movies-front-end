@@ -31,9 +31,9 @@ class UserMainContent extends React.Component {
     }
 
     renderCommentContainer = () => {
-        let {addComment, updateComment, deleteComment, comments} = this.props
+        let {addComment, updateComment, deleteComment, posts, user} = this.props
         return(
-            <CommentContainer addComment={addComment} updateComment={updateComment} deleteComment={deleteComment} comments={comments}/>
+            <CommentContainer addComment={addComment} updateComment={updateComment} deleteComment={deleteComment} posts={posts} user={user}/>
         )
     }
 
