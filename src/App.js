@@ -165,7 +165,7 @@ class App extends React.Component {
 
   // Comments
   addComment = (newComment) => {
-    fetch(`http://localhost:3000/chemical_users`, {
+    fetch(`http://localhost:3000/comments`, {
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ class App extends React.Component {
   }
 
   updateComment = (id, comment) => {
-    fetch(`http://localhost:3000/chemcial_users/${id}`, {
+    fetch(`http://localhost:3000/comments/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

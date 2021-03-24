@@ -41,7 +41,7 @@ class Comment extends React.Component {
             this.setState({
                 id: null,
                 comment: null,
-                movie_id: movie_id,
+                movie_id: null,
                 commentAdd: true
             })
             e.target.parentElement.reset()
@@ -56,6 +56,7 @@ class Comment extends React.Component {
             this.setState({
                 id: null,
                 comment: null,
+                movie_id: null,
                 commentAdd: true
             })
         }
@@ -69,17 +70,17 @@ class Comment extends React.Component {
         }
     }
 
-    generateDateDropdownOptions = (movies) => {
-        return movies.map(movie => {
-            return <option id={movie.id} key={movie.id} value={movie.id}>
-                    {movie.comment}
+    generateDateDropdownOptions = (comments) => {
+        return comments.map(comment => {
+            return <option id={comment.id} key={comment.id} value={comment.id}>
+                    {comment.comment}
                 </option>
             }
         )
     }
 
     render() {
-        let {addComment, updateComment, deleteComment, movies} = this.props
+        let {addComment, updateComment, deleteComment, comments} = this.props
 
         return (
             <div>
@@ -89,15 +90,15 @@ class Comment extends React.Component {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Input type="text" comment="comment" id="comment" placeholder="Comment comment" value={this.state.comment} onChange={this.handleOnChange}/>
+                                    <Input type="text" comment="comment" id="comment" placeholder="Comment here" value={this.state.comment} onChange={this.handleOnChange}/>
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, movies)}>
+                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, comments)}>
                             <Label for="edit-schedule">Change comment</Label>
                             <Input type="select" comment="select" id="edit-schedule">
                                 <option value={"n/a"}>Select comment</option>
-                                {movies ? this.generateDateDropdownOptions(movies) : false}
+                                {comments ? this.generateDateDropdownOptions(comments) : false}
                             </Input>
                         </FormGroup>
                         <Button className="button" comment="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
