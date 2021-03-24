@@ -43,7 +43,8 @@ class UserMainContent extends React.Component {
                 Welcome to your main page. 
                 {this.renderUserInfo()}
                 {this.renderLogout()}  
-                {this.renderMovieContainer()}             
+                {this.renderMovieContainer()}      
+                {this.renderCommentContainer()}       
             </div> 
         )
     }

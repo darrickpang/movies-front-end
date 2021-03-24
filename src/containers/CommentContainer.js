@@ -16,6 +16,7 @@ class CommentContainer extends React.Component {
         return(
             <div>
                 comment container
+                {this.renderComments()}
             </div>
         )
     }
