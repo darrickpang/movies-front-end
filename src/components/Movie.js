@@ -58,7 +58,8 @@ class Movie extends React.Component {
             this.setState({
                 id: null,
                 name: null,
-                movieAdd: true
+                movieAdd: true,
+                deleteMovie: false
             })
         }
         else{
@@ -68,7 +69,8 @@ class Movie extends React.Component {
                 name: find_date.name,
                 year: find_date.year,
                 poster: find_date.poster,
-                movieAdd: false
+                movieAdd: false,
+                deleteMovie: true
             })
         }
     }
@@ -84,7 +86,6 @@ class Movie extends React.Component {
 
     render() {
         let {addMovie, updateMovie, deleteMovie, movies} = this.props
-
         return (
             <div>
                 Add Movie
@@ -112,7 +113,7 @@ class Movie extends React.Component {
                         </FormGroup>
                         <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Add or update Movie</Button>
                         {this.state.deleteMovie ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Delete Schedule</Button> : false
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addMovie, updateMovie, deleteMovie)}>Delete Movie</Button> : false
                         }
                     </Form> 
                 </CardBody>
