@@ -6,9 +6,9 @@ import Comment from '../components/Comment'
 class CommentContainer extends React.Component {
 
     renderComments = () => {
-        let {addComment, updateComment, deleteComment, posts, user} = this.props
+        let {addComment, updateComment, deleteComment, posts, user, movies} = this.props
         return(
-            <Comment addComment={addComment} updateComment={updateComment} deleteComment={deleteComment} posts={posts} user={user}/>
+            <Comment addComment={addComment} updateComment={updateComment} deleteComment={deleteComment} posts={posts} user={user} movies={movies}/>
         )
     }
 

@@ -72,6 +72,12 @@ class Comment extends React.Component {
         }
     }
 
+    handleMovieDropdownChange = (e) => {
+        if(e.target.value !== "n/a"){
+            this.setState({movie_id: parseInt(e.target.value)})
+        }
+    }
+
     generateDateDropdownOptions = (posts) => {
         return posts.map(post => {
             return <option id={post.id} key={post.id} value={post.id}>
@@ -81,8 +87,19 @@ class Comment extends React.Component {
         )
     }
 
+    generateMovieDropdownOptions = (movies) => {
+        return movies.map(movie => {
+            if(movie.id === this.state.gym_id){
+                return <option id={movie.id} key={movie.id} value={movie.id} selected>{movie.name}, {movie.year}</option>
+            }
+            else{
+                return <option id={movie.id} key={movie.id} value={movie.id}>{movie.name}, {movie.year}</option>
+            }
+        })
+    }
+
     render() {
-        let {addComment, updateComment, deleteComment, posts} = this.props
+        let {addComment, updateComment, deleteComment, posts, movies} = this.props
 
         return (
             <div>
@@ -101,6 +118,12 @@ class Comment extends React.Component {
                             <Input type="select" post="select" id="edit-schedule">
                                 <option value={"n/a"}>Select post</option>
                                 {posts ? this.generateDateDropdownOptions(posts) : false}
+                            </Input>
+                        </FormGroup>
+                        <FormGroup onChange={this.handleMovieDropdownChange}>
+                            <Input type="select" name="select" id="edit-goal">
+                                <option value={"n/a"}>Select movie</option>
+                                {movies ? this.generateMovieDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
                         <Button className="button" post="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
