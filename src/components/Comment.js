@@ -20,12 +20,13 @@ class Comment extends React.Component {
 
     handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {post, movie_id} = this.state
-        if(post !== null && movie_id !== null){
+        let {post, movie_id, user_name} = this.state
+        if(post !== null && movie_id !== null && user_name !== null){
             let date_info = {
                 post: post,
                 movie_id: parseInt(movie_id),
-                user_id: parseInt(this.props.user.id)
+                user_id: parseInt(this.props.user.id),
+                user_name: this.props.user.name
             }
             // persist to database
             if(this.state.commentAdd){
