@@ -43,7 +43,8 @@ class Comment extends React.Component {
                 id: null,
                 post: null,
                 movie_id: null,
-                commentAdd: true
+                commentAdd: true,
+                deleteComment: false
             })
             e.target.parentElement.reset()
         }
@@ -68,7 +69,8 @@ class Comment extends React.Component {
             this.setState({
                 id: find_date.id,
                 post: find_date.post,
-                commentAdd: false
+                commentAdd: false,
+                deleteComment: true
             })
         }
     }
