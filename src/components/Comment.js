@@ -8,8 +8,7 @@ class Comment extends React.Component {
         id: null, 
         post: null,
         movie_id: null,
-        commentAdd: true,
-        deleteComment: false
+        commentAdd: true
     }
     
     handleOnChange = (e) => {
@@ -23,21 +22,22 @@ class Comment extends React.Component {
         let {post, movie_id} = this.state
         if(post !== null && movie_id !== null){
             let date_info = {
+                user_name: this.props.user.name,
                 post: post,
                 movie_id: parseInt(movie_id),
-                user_id: parseInt(this.props.user.id),
-                user_name: this.props.user.name
+                user_id: parseInt(this.props.user.id)
+                
             }
             // persist to database
             if(this.state.commentAdd){
                 addComment(date_info)
             } 
-            else if(!this.state.commentAdd && e.target.post === "update"){
+            else if(!this.state.commentAdd && e.target.name === "update"){
                 updateComment(this.state.id, date_info)
             }
-            else {
-                deleteComment(this.state.id, date_info)
-            }
+            // else {
+            //     deleteComment(this.state.id, date_info)
+            // }
             // reset state
             this.setState({
                 id: null,
@@ -60,8 +60,7 @@ class Comment extends React.Component {
                 id: null,
                 post: null,
                 movie_id: null,
-                commentAdd: true,
-                deleteComment: false
+                commentAdd: true
             })
         }
         else{
@@ -69,8 +68,7 @@ class Comment extends React.Component {
             this.setState({
                 id: find_date.id,
                 post: find_date.post,
-                commentAdd: false,
-                deleteComment: true
+                commentAdd: false
             })
         }
     }
@@ -102,7 +100,7 @@ class Comment extends React.Component {
     }
 
     render() {
-        let {addComment, updateComment, deleteComment, posts, movies} = this.props
+        let {addComment, updateComment, posts, movies} = this.props
 
         return (
             <div>
@@ -118,21 +116,21 @@ class Comment extends React.Component {
                         </Row>
                         <FormGroup onChange={(e) => this.autoFillForm(e.target.value, posts)}>
                             <Label for="edit-schedule">Change post</Label>
-                            <Input type="select" post="select" id="edit-schedule">
+                            <Input type="select" name="select" id="edit-post">
                                 <option value={"n/a"}>Select post</option>
                                 {posts ? this.generateDateDropdownOptions(posts) : false}
                             </Input>
                         </FormGroup>
                         <FormGroup onChange={this.handleMovieDropdownChange}>
-                            <Input type="select" name="select" id="edit-goal">
+                            <Input type="select" name="select" id="edit-movie">
                                 <option value={"n/a"}>Select movie</option>
                                 {movies ? this.generateMovieDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
-                        {this.state.deleteComment ? 
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment)}>Add or update Comment</Button>
+                        {/* {this.state.deleteComment ? 
                             <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Comment</Button> : false
-                        }
+                        } */}
                     </Form> 
                 </CardBody>
             </div>
