@@ -178,6 +178,7 @@ class App extends React.Component {
       this.setState({
           posts: [...this.state.posts, {
           id: json.id,
+          user_name: json.user_name,
           post: json.post,
           movie_id: json.movie_id
         }]
@@ -200,6 +201,7 @@ class App extends React.Component {
         if(post.id === json.id){
             let newComment = {
                   id: json.id,
+                  user_name: json.user_name, 
                   post: json.post,
                   movie_id: json.movie_id
             }
