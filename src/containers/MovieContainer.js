@@ -58,7 +58,16 @@ class MovieContainer extends React.Component {
             <div>
                 {this.props.movies.map(movie => {
                     return(
-                        <p> Name: {movie.name}, Year: {movie.year}</p>
+                        <div> 
+                            Name: {movie.name}, Year: {movie.year}
+                            
+                            {movie.comments.map(comment => {
+                                return(
+                                    <p>{comment.user_name}: {comment.post}</p>
+                            )
+                                
+                            })}
+                        </div>
                     )
                 })}
             </div>
