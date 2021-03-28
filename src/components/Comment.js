@@ -43,8 +43,7 @@ class Comment extends React.Component {
                 id: null,
                 post: null,
                 movie_id: null,
-                commentAdd: true,
-                deleteComment: false
+                commentAdd: true
             })
             e.target.parentElement.reset()
         }
@@ -61,7 +60,8 @@ class Comment extends React.Component {
                 id: null,
                 post: null,
                 movie_id: null,
-                commentAdd: true
+                commentAdd: true,
+                deleteComment: false
             })
         }
         else{
@@ -92,7 +92,7 @@ class Comment extends React.Component {
 
     generateMovieDropdownOptions = (movies) => {
         return movies.map(movie => {
-            if(movie.id === this.state.gym_id){
+            if(movie.id === this.state.movie_id){
                 return <option id={movie.id} key={movie.id} value={movie.id} selected>{movie.name}, {movie.year}</option>
             }
             else{
@@ -129,7 +129,7 @@ class Comment extends React.Component {
                                 {movies ? this.generateMovieDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" post="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Add or update Comment</Button>
                         {this.state.deleteComment ? 
                             <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete Comment</Button> : false
                         }
