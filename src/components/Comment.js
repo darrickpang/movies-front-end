@@ -20,8 +20,8 @@ class Comment extends React.Component {
 
     handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {post, movie_id, user_name} = this.state
-        if(post !== null && movie_id !== null && user_name !== null){
+        let {post, movie_id} = this.state
+        if(post !== null && movie_id !== null){
             let date_info = {
                 post: post,
                 movie_id: parseInt(movie_id),
