@@ -13,6 +13,7 @@ class App extends React.Component {
     },
     movies: [], 
     posts: [],
+    collections: [],
     token: ""
   }
 
@@ -243,7 +244,7 @@ class App extends React.Component {
     .then(r => r.json())
     .then(json => {
       this.setState({
-          posts: [...this.state.posts, {
+          collections: [...this.state.collections, {
           id: json.id,
           movie_name: json.movie_name,
           user_id: json.user_id
@@ -277,7 +278,7 @@ class App extends React.Component {
             }
         })
         this.setState({
-            posts: posts
+            collections: collections
     })})
   }
 
@@ -288,9 +289,9 @@ class App extends React.Component {
     .then(r => r.json())
     .then(json => {
       console.log('deleted')
-      let posts= this.state.posts.filter(post => post.id !== id)
+      let collections = this.state.collections.filter(collection => collection.id !== id)
       this.setState({
-        posts: posts
+        collections: collections
       })
     })
   }
