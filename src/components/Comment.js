@@ -21,8 +21,8 @@ class Comment extends React.Component {
 
     handleSubmit = (e, addComment, updateComment, deleteComment) => {
         e.preventDefault()
-        let {post, movie_id} = this.state
-        if(post !== null && movie_id !== null && user_id !== null){
+        let {post, movie_id, user_id} = this.state
+        if(post !== null && movie_id !== null){
             let date_info = {
                 user_name: this.props.user.name,
                 post: post,
@@ -44,7 +44,6 @@ class Comment extends React.Component {
             this.setState({
                 id: null,
                 post: null,
-                user_id: null,
                 movie_id: null,
                 commentAdd: true
             })
@@ -62,7 +61,6 @@ class Comment extends React.Component {
             this.setState({
                 id: null,
                 post: null,
-                user_id: null,
                 movie_id: null,
                 commentAdd: true,
                 deleteComment: false
@@ -87,7 +85,7 @@ class Comment extends React.Component {
 
     generateDateDropdownOptions = (posts) => {
         return posts.map(post => {
-            if(this.state.user_id === this.props.user.id){
+            if(post.user_id === this.props.user.id){
                 return <option id={post.id} key={post.id} value={post.id}>
                     {post.post}
                 </option>
