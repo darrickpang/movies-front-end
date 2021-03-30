@@ -230,6 +230,71 @@ class App extends React.Component {
     })
   }
 
+  // Add movies
+  addCollection = (newCollection) => {
+    fetch(`http://localhost:3000/movie_users`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(newCollection),
+    }) 
+    .then(r => r.json())
+    .then(json => {
+      this.setState({
+          posts: [...this.state.posts, {
+          id: json.id,
+          movie_name: json.movie_name,
+          user_id: json.user_id
+        }]
+      })
+    })
+  }
+
+  updateCollection = (id, collection) => {
+    fetch(`http://localhost:3000/movie_users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(collection)
+    })
+    .then(res => res.json())
+    .then(json => {
+      let  collections = this.state.collections.map(collection => {
+        if(collection.id === json.id){
+            let newCollection = {
+                  id: json.id,
+                  movie_name: json.movie_name, 
+                  user_id: json.user_id
+            }
+            return newCollection
+            }
+            else{
+              return collection
+            }
+        })
+        this.setState({
+            posts: posts
+    })})
+  }
+
+  deleteCollection = (id, post) => {
+    fetch(`http://localhost:3000/movie_users/${id}`, {
+      method: 'DELETE'
+    }) 
+    .then(r => r.json())
+    .then(json => {
+      console.log('deleted')
+      let posts= this.state.posts.filter(post => post.id !== id)
+      this.setState({
+        posts: posts
+      })
+    })
+  }
+
   renderUserLogin = () => {
     return <UserLoginSignUp login={true} userLogin={this.userLogin}/>
   }
