@@ -12,10 +12,24 @@ class AddMovieContainer extends React.Component {
         )
     }
 
+    showCollection = () => {
+        let {collections, user} = this.props
+        return collections.map(collection => {
+            if(collection.user_id === user.id){
+                return(
+                    <div>
+                        {collection.movie_name}
+                    </div>
+                )
+            }
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.renderCollection()}
+                {this.showCollection()}
             </div>
         )
     }
