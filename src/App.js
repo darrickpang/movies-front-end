@@ -34,6 +34,10 @@ class App extends React.Component {
     fetch('http://localhost:3000/movies')
     .then(res => res.json())
     .then(json => this.setState({movies: json}))
+
+    fetch('http://localhost:3000/movie_users')
+    .then(res => res.json())
+    .then(json => this.setState({collections: json}))
   }
 
   userAuthResponse = (json) => {

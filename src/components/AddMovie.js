@@ -72,11 +72,11 @@ class AddMovie extends React.Component {
 
     generateDateDropdownOptions = (collections) => {
         return collections.map(collection => {
-            // if(movie_name.user_id === this.props.user.id){
+            if(collection.user_id === this.props.user.id){
                 return <option id={collection.id} key={collection.id} value={collection.id}>
                     {collection.movie_name}
                 </option>
-            // }
+            }
         })
     }
 
