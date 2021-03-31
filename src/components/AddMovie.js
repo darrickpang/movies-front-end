@@ -103,15 +103,9 @@ class AddMovie extends React.Component {
                                 {posts ? this.generateDateDropdownOptions(posts) : false}
                             </Input>
                         </FormGroup>
-                        <FormGroup onChange={this.handleMovieDropdownChange}>
-                            <Input type="select" name="select" id="edit-movie">
-                                <option value={"n/a"}>Select movie</option>
-                                {movies ? this.generateMovieDropdownOptions(movies) : false}
-                            </Input>
-                        </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update AddMovie</Button>
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update collection</Button>
                         {this.state.deleteCollection ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addCollection, updateCollection, deleteCollection)}>Delete AddMovie</Button> : false
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addCollection, updateCollection, deleteCollection)}>Delete from collection</Button> : false
                         }
                     </Form> 
                 </CardBody>
