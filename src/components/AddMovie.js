@@ -70,21 +70,14 @@ class AddMovie extends React.Component {
         }
     }
 
-    handleMovieDropdownChange = (e) => {
-        if(e.target.value !== "n/a"){
-            this.setState({movie_id: parseInt(e.target.value)})
-        }
-    }
-
     generateDateDropdownOptions = (posts) => {
         return posts.map(movie_name => {
             if(movie_name.user_id === this.props.user.id){
                 return <option id={movie_name.id} key={movie_name.id} value={movie_name.id}>
                     {movie_name.movie_name}
                 </option>
+                }
             }
-            }
-            
         )
     }
 
@@ -93,7 +86,7 @@ class AddMovie extends React.Component {
 
         return (
             <div>
-                Add AddMovie
+                Add Movie to Collection
                 <CardBody>
                     <Form onSubmit={(e) => this.handleSubmit(e, addCollection)}>
                         <Row form>
