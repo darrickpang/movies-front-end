@@ -96,13 +96,13 @@ class AddMovie extends React.Component {
                             </Col>
                         </Row>
                         <FormGroup onChange={(e) => this.autoFillForm(e.target.value, collections)}>
-                            <Label for="edit-schedule">Change movie_name</Label>
+                            <Label for="edit-schedule">Change collection</Label>
                             <Input type="select" name="select" id="edit-movie_name">
-                                <option value={"n/a"}>Select movie_name</option>
+                                <option value={"n/a"}>Select movie name</option>
                                 {collections ? this.generateDateDropdownOptions(collections) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update collection</Button>
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update your collection</Button>
                         {this.state.deleteCollection ? 
                             <Button className="button"onClick={(e) => this.handleSubmit(e, addCollection, updateCollection, deleteCollection)}>Delete from collection</Button> : false
                         }
