@@ -39,9 +39,9 @@ class UserMainContent extends React.Component {
     }
 
     renderCollection = () => {
-        let {addCollection, updateCollection, deleteCollection, user} = this.props 
+        let {addCollection, updateCollection, deleteCollection, user, collections} = this.props 
         return(
-            <AddMovieContainer addCollection={addCollection} updateCollection={updateCollection} deleteCollection={deleteCollection} user={user}/>
+            <AddMovieContainer addCollection={addCollection} updateCollection={updateCollection} deleteCollection={deleteCollection} user={user} collections={collections}/>
         )
     }
 

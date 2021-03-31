@@ -307,7 +307,7 @@ class App extends React.Component {
   renderUserMainContent = () => {
     return <UserMainContent user ={this.state.user} token={this.state.token} addMovie={this.addMovie} updateMovie={this.updateMovie} deleteMovie={this.deleteMovie}
             movies={this.state.movies} addComment={this.addComment} updateComment={this.updateComment} posts={this.state.posts} deleteComment={this.deleteComment}
-            addCollection={this.addCollection} updateCollection={this.updateCollection} deleteCollection={this.deleteCollection}
+            addCollection={this.addCollection} updateCollection={this.updateCollection} deleteCollection={this.deleteCollection} collections={this.state.collections}
           />
   }
 

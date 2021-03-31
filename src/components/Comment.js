@@ -90,9 +90,7 @@ class Comment extends React.Component {
                     {post.post}
                 </option>
             }
-            }
-            
-        )
+        })
     }
 
     generateMovieDropdownOptions = (movies) => {

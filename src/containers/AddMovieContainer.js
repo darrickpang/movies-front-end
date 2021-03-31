@@ -6,16 +6,15 @@ import AddMovie from '../components/AddMovie'
 class AddMovieContainer extends React.Component {
 
     renderCollection = () => {
-        let {addCollection, updateCollection, deleteCollection, user} = this.props 
+        let {addCollection, updateCollection, deleteCollection, user, collections} = this.props 
         return(
-            <AddMovie addCollection={addCollection} updateCollection={updateCollection} deleteCollection={deleteCollection} user={user}/>
+            <AddMovie addCollection={addCollection} updateCollection={updateCollection} deleteCollection={deleteCollection} user={user} collections={collections}/>
         )
     }
 
     render(){
         return(
             <div>
-                add movie to collection
                 {this.renderCollection()}
             </div>
         )

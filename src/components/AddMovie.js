@@ -70,19 +70,18 @@ class AddMovie extends React.Component {
         }
     }
 
-    generateDateDropdownOptions = (posts) => {
-        return posts.map(movie_name => {
-            if(movie_name.user_id === this.props.user.id){
+    generateDateDropdownOptions = (movie_names) => {
+        return movie_names.map(movie_name => {
+            // if(movie_name.user_id === this.props.user.id){
                 return <option id={movie_name.id} key={movie_name.id} value={movie_name.id}>
                     {movie_name.movie_name}
                 </option>
-                }
-            }
-        )
+            // }
+        })
     }
 
     render() {
-        let {addCollection, updateCollection, deleteCollection, posts, movies} = this.props
+        let {addCollection, updateCollection, deleteCollection, collections} = this.props
 
         return (
             <div>
@@ -96,11 +95,11 @@ class AddMovie extends React.Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, posts)}>
+                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, collections)}>
                             <Label for="edit-schedule">Change movie_name</Label>
                             <Input type="select" name="select" id="edit-movie_name">
                                 <option value={"n/a"}>Select movie_name</option>
-                                {posts ? this.generateDateDropdownOptions(posts) : false}
+                                {collections ? this.generateDateDropdownOptions(collections) : false}
                             </Input>
                         </FormGroup>
                         <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update collection</Button>
