@@ -3,6 +3,7 @@ import {  withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import MovieContainer from './MovieContainer'
 import CommentContainer from './CommentContainer'
+import AddMovieContainer from './AddMovieContainer'
 
 class UserMainContent extends React.Component {
     renderUserInfo = () => {
@@ -34,6 +35,13 @@ class UserMainContent extends React.Component {
         let {addComment, updateComment, deleteComment, posts, user, movies} = this.props
         return(
             <CommentContainer addComment={addComment} updateComment={updateComment} deleteComment={deleteComment} posts={posts} user={user} movies={movies}/>
+        )
+    }
+
+    renderCollection = () => {
+        let {addCollection, updateCollection, deleteCollection, user} = this.props 
+        return(
+            <AddMovieContainer addCollection={addCollection} updateCollection={updateCollection} deleteCollection={deleteCollection} user={user}/>
         )
     }
 

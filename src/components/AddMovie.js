@@ -17,30 +17,29 @@ class AddMovie extends React.Component {
         })
     }
 
-    handleSubmit = (e, addComment, updateComment, deleteComment) => {
+    handleSubmit = (e, addCollection, updateCollection, deleteCollection) => {
         e.preventDefault()
         let {movie_name} = this.state
-        if(movie_name !== null && movie_id !== null){
+        if(movie_name !== null){
             let date_info = {
                 movie_name: movie_name,
                 user_id: parseInt(this.props.user.id)
             }
             // persist to database
-            if(this.state.commentAdd){
-                addComment(date_info)
+            if(this.state.collectionAdd){
+                addCollection(date_info)
             } 
-            else if(!this.state.commentAdd && e.target.name === "update"){
-                updateComment(this.state.id, date_info)
+            else if(!this.state.collectionAdd && e.target.name === "update"){
+                updateCollection(this.state.id, date_info)
             }
             else {
-                deleteComment(this.state.id, date_info)
+                deleteCollection(this.state.id, date_info)
             }
             // reset state
             this.setState({
                 id: null,
                 movie_name: null,
-                movie_id: null,
-                commentAdd: true
+                collectionAdd: true
             })
             e.target.parentElement.reset()
         }
@@ -56,9 +55,8 @@ class AddMovie extends React.Component {
             this.setState({
                 id: null,
                 movie_name: null,
-                movie_id: null,
-                commentAdd: true,
-                deleteComment: false
+                collectionAdd: true,
+                deleteCollection: false
             })
         }
         else{
@@ -66,8 +64,8 @@ class AddMovie extends React.Component {
             this.setState({
                 id: find_date.id,
                 movie_name: find_date.movie_name,
-                commentAdd: false,
-                deleteComment: true
+                collectionAdd: false,
+                deleteCollection: true
             })
         }
     }
@@ -90,25 +88,14 @@ class AddMovie extends React.Component {
         )
     }
 
-    generateMovieDropdownOptions = (movies) => {
-        return movies.map(movie => {
-            if(movie.id === this.state.movie_id){
-                return <option id={movie.id} key={movie.id} value={movie.id} selected>{movie.name}, {movie.year}</option>
-            }
-            else{
-                return <option id={movie.id} key={movie.id} value={movie.id}>{movie.name}, {movie.year}</option>
-            }
-        })
-    }
-
     render() {
-        let {addComment, updateComment, deleteComment, posts, movies} = this.props
+        let {addCollection, updateCollection, deleteCollection, posts, movies} = this.props
 
         return (
             <div>
                 Add AddMovie
                 <CardBody>
-                    <Form onSubmit={(e) => this.handleSubmit(e, addComment)}>
+                    <Form onSubmit={(e) => this.handleSubmit(e, addCollection)}>
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
@@ -129,9 +116,9 @@ class AddMovie extends React.Component {
                                 {movies ? this.generateMovieDropdownOptions(movies) : false}
                             </Input>
                         </FormGroup>
-                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addComment, updateComment)}>Add or update AddMovie</Button>
-                        {this.state.deleteComment ? 
-                            <Button className="button"onClick={(e) => this.handleSubmit(e, addComment, updateComment, deleteComment)}>Delete AddMovie</Button> : false
+                        <Button className="button" name="update" onClick={(e) => this.handleSubmit(e, addCollection, updateCollection)}>Add or update AddMovie</Button>
+                        {this.state.deleteCollection ? 
+                            <Button className="button"onClick={(e) => this.handleSubmit(e, addCollection, updateCollection, deleteCollection)}>Delete AddMovie</Button> : false
                         }
                     </Form> 
                 </CardBody>
