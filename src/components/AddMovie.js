@@ -70,11 +70,11 @@ class AddMovie extends React.Component {
         }
     }
 
-    generateDateDropdownOptions = (movie_names) => {
-        return movie_names.map(movie_name => {
+    generateDateDropdownOptions = (collections) => {
+        return collections.map(collection => {
             // if(movie_name.user_id === this.props.user.id){
-                return <option id={movie_name.id} key={movie_name.id} value={movie_name.id}>
-                    {movie_name.movie_name}
+                return <option id={collection.id} key={collection.id} value={collection.id}>
+                    {collection.movie_name}
                 </option>
             // }
         })
@@ -91,7 +91,7 @@ class AddMovie extends React.Component {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Input type="text" name="movie_name" id="movie_name" placeholder="AddMovie here" value={this.state.movie_name} onChange={this.handleOnChange}/>
+                                    <Input type="text" name="movie_name" id="movie_name" placeholder="Add movie to your collection" value={this.state.movie_name} onChange={this.handleOnChange}/>
                                 </FormGroup>
                             </Col>
                         </Row>
