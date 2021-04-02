@@ -30,6 +30,7 @@ class AddMovieContainer extends React.Component {
         return(
             <div>
                 {this.renderCollection()}
+                Your movie collection: 
                 {this.showCollection()}
             </div>
         )
